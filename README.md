@@ -28,14 +28,14 @@
 | status_id    | integer    | null: false                  |
 | claim_id     | integer    | null: false                  |
 | area_id      | integer    | null: false                  |
-| date_id      | integer    | null: false                  |
+| send_day_id  | integer    | null: false                  |
 | price        | integer    | null: false                  |
 | user         | references | null:false, foreign_key:true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :purchase
+- has_one :purchase
 
 ## addresses テーブル
 
@@ -47,6 +47,7 @@
 | address       | string     | null: false                    |
 | building      | string     |                                |
 | telephone     | string     | null: false                    |
+| purchase      | references | null: false, foreign_key:true  |
 
 ### Association
 
@@ -58,10 +59,9 @@
 | ------------ | ---------- | ------------------------------ |
 | user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
-| address      | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :address
+- has_one :address
