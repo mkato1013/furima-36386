@@ -43,7 +43,6 @@ RSpec.describe User, type: :model do
       @user.password = "000000"
       @user.password_confirmation = "000001"
       @user.valid?
-      binding.pry
       expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
     end
 
