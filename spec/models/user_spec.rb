@@ -10,48 +10,6 @@ RSpec.describe User, type: :model do
     it 'ニックネーム、メールアドレス、パスワード、パスワード（確認）、お名前（全角）、お名前カナ（全角）、生年月日が存在すれば登録できる' do
       expect(@user).to be_valid
     end
-
-    it 'ニックネームが正しければ登録できる' do
-      @user.nickname = 'ああ'
-      expect(@user).to be_valid
-    end
-
-    it 'メールアドレスが正しければ登録できる' do
-      @user.email = 'aaa@aaa'
-      expect(@user).to be_valid
-    end
-
-    it 'パスワードが６文字で半角英数字混合であれば登録できる' do
-      @user.password = '1a1a1a'
-      @user.password_confirmation = '1a1a1a'
-      expect(@user).to be_valid
-    end
-
-
-    it 'last_nameが正しければ登録できる' do
-      @user.last_name = '佐藤'
-      expect(@user).to be_valid
-    end
-
-    it 'first_nameが正しければ登録できる' do
-      @user.first_name = 'たける'
-      expect(@user).to be_valid
-    end
-
-    it 'last_name_kanaが正しければ登録できる' do
-      @user.last_name = 'サトウ'
-      expect(@user).to be_valid
-    end
-
-    it 'first_name_kanaが正しければ登録できる' do
-      @user.last_name = 'タケル'
-      expect(@user).to be_valid
-    end
-
-    it 'birthdayが正しければ登録できる' do
-      @user.birthday = '1995/3/5'
-      expect(@user).to be_valid
-    end
    end
 
    context '内容に問題がある場合' do
