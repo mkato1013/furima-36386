@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
-   context '内容に問題がない場合'
+   context '内容に問題がない場合' do
     it 'ニックネーム、メールアドレス、パスワード、パスワード（確認）、お名前（全角）、お名前カナ（全角）、生年月日が存在すれば登録できる' do
       expect(@user).to be_valid
     end
@@ -52,8 +52,9 @@ RSpec.describe User, type: :model do
       @user.birthday = '1995/3/5'
       expect(@user).to be_valid
     end
+   end
 
-   context '内容に問題がある場合'
+   context '内容に問題がある場合' do
     it 'メールアドレスが空では登録できない' do
       @user.email = ''
       @user.valid?
@@ -135,5 +136,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "First name kana is invalid. Input full-width katakana characters."
     end
+   end
   end
 end
