@@ -2,8 +2,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @items = Item.all
+    # @items = Item.all
     @items = Item.order("created_at DESC")
+    # @claimname = claim
+    # binding.pry
   end
 
   def new
