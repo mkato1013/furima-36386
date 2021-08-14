@@ -26,13 +26,13 @@ RSpec.describe OrderForm, type: :model do
       end
 
       it '都道府県が空で登録できない' do
-        @order_form.prefecture = nil
+        @order_form.prefecture_id = nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include "Prefecture can't be blank"
       end
 
       it '都道府県が[id:0]だと登録できない' do
-        @order_form.prefecture = nil
+        @order_form.prefecture_id = nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include "Prefecture is invalid"
       end
@@ -77,6 +77,12 @@ RSpec.describe OrderForm, type: :model do
         @order_form.item_id = ''
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include "Item can't be blank"
+      end
+      
+      it 'tokenが空では登録できない' do
+        @order_form.token = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include "Token can't be blank"
       end
 
     end
