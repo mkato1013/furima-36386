@@ -10,6 +10,11 @@ RSpec.describe OrderForm, type: :model do
       it 'クレカ情報、郵便番号、都道府県、市区町村、番地、電話番号が存在すれば登録できる' do
         expect(@order_form).to be_valid
       end
+
+      it '建物名がなくても登録できる' do
+        @order_form.building = nil
+        expect(@order_form).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
@@ -32,7 +37,7 @@ RSpec.describe OrderForm, type: :model do
       end
 
       it '都道府県が[id:0]だと登録できない' do
-        @order_form.prefecture_id = nil
+        @order_form.prefecture_id = 0
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include "Prefecture is invalid"
       end
@@ -53,6 +58,12 @@ RSpec.describe OrderForm, type: :model do
         @order_form.telephone = ''
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include "Telephone can't be blank"
+      end
+
+      it '電話番号が英数字混合では登録できない' do
+        @order_form.telephone = '1aa11a1a1a1'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include "Telephone is invalid"
       end
 
       it '電話番号が9文字以下なら登録できない' do

@@ -40,8 +40,7 @@ class PurchasesController < ApplicationController
 
   def set_redirect
     @item = Item.find(params[:item_id])
-    return redirect_to root_path if current_user.id == @item.user.id
-    return redirect_to root_path if @item.purchase.present?
+    return redirect_to root_path if current_user.id == @item.user.id || @item.purchase.present?
   end
 
 end
