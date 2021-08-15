@@ -54,6 +54,7 @@ class ItemsController < ApplicationController
 
   def set_redirect
     return redirect_to root_path if current_user.id != @item.user.id
+    return redirect_to root_path if @item.purchase.present?
   end
 
 end

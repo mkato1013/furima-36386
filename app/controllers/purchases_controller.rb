@@ -1,12 +1,13 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_redirect, only: [:index, :create]
+
 
   def index
-    @item = Item.find(params[:item_id])
     @order_form = OrderForm.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
       pay_item
@@ -30,6 +31,17 @@ class PurchasesController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def order_params
+    params.require(:order_form).permit(:postal_code, :prefecture_id, :city, :address, :telephone, :building).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
+  end
+
+
+  def set_redirect
+    @item = Item.find(params[:item_id])
+    return redirect_to root_path if current_user.id == @item.user.id
+    return redirect_to root_path if @item.purchase.present?
   end
 
 end
