@@ -127,18 +127,18 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-
       <% if @items.present? %>
         <% @items.each do |item| %>
           <li class='list'>
-          <%# 商品が売れていればsold outを表示しましょう %>
-          <%# <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div> %>
-          <%# //商品が売れていればsold outを表示しましょう %>
+          
             <div class='item-img-content'>
             <%= link_to item_path(item.id) do %>
               <%= image_tag item.image, class: 'item-img' if item.image.attached? %>
+              <% if item.purchase.present? %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+              <% end %>
               <div class='item-info'>
                 <h1 class='item-name'>
                   <%= item.item_name %>
